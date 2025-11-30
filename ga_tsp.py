@@ -8,10 +8,10 @@ from deap import base, creator, tools, algorithms
 # ============================
 
 def load_dataset(filename):
-    data = np.loadtxt(filename, delimiter=",")  # langsung baca 2 kolom
+    data = np.loadtxt(filename, delimiter=",")  
     return data  # shape: (N,2)
 
-FILENAME = "data/small.csv"  # ubah sesuai kebutuhan
+FILENAME = "data/small.csv"  
 cities = load_dataset(FILENAME)
 N = len(cities)
 
@@ -26,7 +26,7 @@ def total_distance(order):
     dist = 0
     for i in range(N):
         a = cities[order[i]]
-        b = cities[order[(i + 1) % N]]  # kembali ke awal
+        b = cities[order[(i + 1) % N]]  
         dist += euclidean(a, b)
     return dist
 
@@ -38,7 +38,7 @@ if not hasattr(creator, "Individual"):
 
 toolbox = base.Toolbox()
 
-toolbox.register("indices", random.sample, range(N), N)  # generate route
+toolbox.register("indices", random.sample, range(N), N)  
 toolbox.register("individual", tools.initIterate, creator.Individual, toolbox.indices)
 toolbox.register("population", tools.initRepeat, list, toolbox.individual)
 
@@ -75,7 +75,7 @@ def solve_tsp_ga():
 # ============================
 
 def plot_route(best):
-    ordered = cities[best]      # urutkan koordinatnya
+    ordered = cities[best]     
     xs = ordered[:, 0]
     ys = ordered[:, 1]
 
